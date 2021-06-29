@@ -11,8 +11,8 @@
     </center>
 
     <?php
-  include 'koneksi.php';
-  ?>
+    include 'koneksi.php';
+    ?>
 
     <table class="table table-hover" style="width: 100%">
         <thead>
@@ -30,9 +30,9 @@
             <?php $nomor = 1; ?>
             <?php $totalbelanja = 0; ?>
             <?php
-      $ambil = $koneksi->query("SELECT * FROM pemesanan_produk JOIN produk ON pemesanan_produk.id_menu=produk.id_menu 
+            $ambil = $koneksi->query("SELECT * FROM pemesanan_produk JOIN produk ON pemesanan_produk.id_menu=produk.id_menu 
                 WHERE pemesanan_produk.id_pemesanan='$_GET[id]'");
-      ?>
+            ?>
             <?php while ($pecah = $ambil->fetch_assoc()) { ?>
             <?php $subharga1 = $pecah['harga'] * $pecah['jumlah']; ?>
             <tr>
