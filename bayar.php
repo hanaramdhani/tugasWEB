@@ -1,10 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['login_user'])) {
-  header("location: login.php");
+    header("location: login.php");
 } else {
+    print_r($_SESSION);
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -24,7 +24,6 @@ if (!isset($_SESSION['login_user'])) {
 </head>
 
 <body>
-
     <header class="bg-danger" style=" height: 70px;">
         <div class="atas">
             <H3
@@ -34,7 +33,6 @@ if (!isset($_SESSION['login_user'])) {
             </H3>
         </div>
     </header>
-
     <div class="container-fluid" style="margin-top: 0px;">
         <div class="row"></div>
         <div class="row">
@@ -42,21 +40,24 @@ if (!isset($_SESSION['login_user'])) {
                 <div style="height: 1500px;" class="bg-danger">
                     <div class="list-group "
                         style="padding-top: 20px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;">
-                        <a href="admin.php"
+                        <a href="user.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px;  padding:15px">Home</a>
-                        <a href="daftar_menu.php"
+                        <a href="menu_pembeli.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px; padding:15px">Daftar Menu</a>
-                        <a href="pesanan.php"
+                        <a href="pesanan_pembeli.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
-                            style="border: 0px;  padding:15px">Pesanan</a>
-                        <a href="pengiriman_admin.php"
-                            class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
-                            style="border: 0px;  padding:15px">Pengiriman</a>
+                            style="border: 0px;  padding:15px">Pesanan Anda</a>
                         <a href="About.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px;  padding:15px">About</a>
+                        <a href="bayar.php"
+                            class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
+                            style="border: 0px;  padding:15px">Bayar</a>
+                        <a href="pengiriman.php"
+                            class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
+                            style="border: 0px;  padding:15px">Pengiriman</a>
                         <a href="logout.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px;  padding:15px">Logout</a>
@@ -65,58 +66,54 @@ if (!isset($_SESSION['login_user'])) {
             </div>
 
             <div class="col-10" style="background-color: #CCF5FC">
-                <!-- Jumbotron -->
-                <!-- <div class="jumbotron jumbotron-fluid text-center" style="background-color: #CCF5FC; ">
-                    <div class="container">
-                        <h1 class="display-8"><span class="font-weight-bold">RESTORAN KELONGTONG BARU</span></h1>
-                        <hr>
-                        <p class="lead font-weight-bold">"Selamat Datang di Beranda Admin"</p>
-                    </div>
-                </div> -->
-                <!-- Akhir Jumbotron -->
-                <!-- Menu -->
-                <div class="container">
-                    <a href="tambah_menu.php" class="btn btn-info mt-3">TAMBAH DAFTAR DESSERT</a>
-                    <div class="row">
+                <?php
+                    $test = $_SESSION['login_user'];
 
-                        <?php
+                    include('koneksi.php');
 
-              include('koneksi.php');
+                    $test = $koneksi->query("SELECT *FROM pemesanan WHERE user='$_SESSION[login_user]'");
+                    ?>
 
-              $query = mysqli_query($koneksi, 'SELECT * FROM produk');
-              $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
-
-
-              ?>
-
-                        <?php foreach ($result as $result) : ?>
-
-                        <div class="col-md-3 mt-4">
-                            <div class="card brder-dark">
-                                <img src="upload/<?php echo $result['gambar'] ?>"
-                                    style="width:80%; height: 140px; margin-top: 0px; display: block; margin: auto;"
-                                    class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title font-weight-bold"><?php echo $result['nama_menu'] ?></h5>
-                                    <label class="card-text harga"><strong>Rp.</strong>
-                                        <?php echo number_format($result['harga']); ?></label><br>
-                                    <a href="edit_menu.php?id_menu=<?php echo $result['id_menu']  ?>"
-                                        class="btn btn-info btn-sm btn-block">EDIT</a>
-
-                                    <a href="hapus_menu.php?id_menu=<?php echo $result['id_menu']  ?>"
-                                        class="btn btn-danger btn-sm btn-block text-light">DELETE</a>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
+                <?php while ($result = $test->fetch_assoc()) { ?>
+                <div class="card">
+                    <div class="col-sm">
+                        <table class="table table-striped" id="belum-bayar">
+                            <thead>
+                                <tr>
+                                    <th>id Pemesanan</th>
+                                    <th>Tanggal Pemesanan</th>
+                                    <th>Total belanja</th>
+                                    <th>Status</th>
+                                    <th>User</th>
+                                    <th>Bukti Pembayaran</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><?php echo $result['id_pemesanan']; ?></td>
+                                    <td><?php echo $result['tanggal_pemesanan']; ?></td>
+                                    <td><?php echo $result['total_belanja']; ?></td>
+                                    <td><button
+                                            class="btn btn-xs <?= $result['statuss'] == 1 ? 'btn-success' : 'btn-danger' ?> "><i
+                                                class="fa <?= $result['statuss'] == 1 ? 'fa-check-circle' : 'fa-ban' ?>"></i></button>
+                                    </td>
+                                    <td><?php echo $result['user']; ?></td>
+                                    <td><?php echo $result['bukti_pembayaran'] ?></td>
+                                    <td><a href="transaksi_pembayaran.php?id=<?php echo $result['id_pemesanan'] ?>"
+                                            class="btn btn-secondary btn-sm">Upload Bukti Transfer</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+                <?php } ?>
             </div>
-
-
-            <!-- Akhir Menu -->
-
         </div>
+        <!-- Akhir Menu -->
+    </div>
+
+    </div>
     </div>
     </div>
 
@@ -127,7 +124,12 @@ if (!isset($_SESSION['login_user'])) {
             <img src="images/smile.png" class="mr-1 ml-2" data-toggle="tooltip" title="Facebook">
         </div>
     </footer>
-    <!-- Akhir Footer -->
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#belum-bayar').DataTable();
+    });
+    </script>
 
 
 
@@ -149,4 +151,7 @@ if (!isset($_SESSION['login_user'])) {
 </body>
 
 </html>
-<?php } ?>
+
+<?php
+}
+?>

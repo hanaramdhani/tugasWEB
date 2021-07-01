@@ -2,15 +2,10 @@
 include('koneksi.php');
 session_start();
 if (!isset($_SESSION['login_user'])) {
-  header("location: login.php");
+    header("location: login.php");
 } else {
+    print_r($_SESSION);
 ?>
-<?php
-  if (empty($_SESSION["pesanan"]) or !isset($_SESSION["pesanan"])) {
-    echo "<script>alert('Pesanan kosong, Silahkan Pesan dahulu');</script>";
-    echo "<script>location= 'menu_pembeli.php'</script>";
-  }
-  ?>
 
 <!doctype html>
 <html lang="en">
@@ -62,6 +57,12 @@ if (!isset($_SESSION['login_user'])) {
                         <a href="About.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px;  padding:15px">About</a>
+                        <a href="bayar.php"
+                            class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
+                            style="border: 0px;  padding:15px">Bayar</a>
+                        <a href="pengiriman.php"
+                            class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
+                            style="border: 0px;  padding:15px">Pengiriman</a>
                         <a href="logout.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px;  padding:15px">Logout</a>
@@ -70,20 +71,11 @@ if (!isset($_SESSION['login_user'])) {
             </div>
 
             <div class="col-10" style="background-color: #CCF5FC">
-                <!-- Jumbotron -->
-                <!-- <div class="jumbotron jumbotron-fluid text-center" style="background-color: #CCF5FC; ">
-                    <div class="container">
-                        <h1 class="display-8"><span class="font-weight-bold">RESTORAN KELONGTONG BARU</span></h1>
-                        <hr>
-                        <p class="lead font-weight-bold">"Selamat Datang di Beranda Admin"</p>
-                    </div>
-                </div> -->
-                <!-- Akhir Jumbotron -->
-                <!-- Menu -->
                 <div class="container">
                     <div class="judul-pesanan mt-5">
 
                         <h3 class="text-center font-weight-bold">PESANAN ANDA</h3>
+
 
                     </div>
                     <table class="table table-bordered" id="example">
@@ -103,18 +95,18 @@ if (!isset($_SESSION['login_user'])) {
                             <?php foreach ($_SESSION["pesanan"] as $id_menu => $jumlah) : ?>
 
                             <?php
-                  // include('koneksi.php');
-                  $host = "localhost";
-                  $user = "root";
-                  $pass = "";
-                  $db = "database_kue";
+                                    // include('koneksi.php');
+                                    $host = "localhost";
+                                    $user = "root";
+                                    $pass = "";
+                                    $db = "database_kue";
 
-                  $koneksi = mysqli_connect($host, $user, $pass, $db);
-                  global $conn;
-                  $ambil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id_menu='$id_menu'");
-                  $pecah = $ambil->fetch_assoc();
-                  $subharga = $pecah["harga"] * $jumlah;
-                  ?>
+                                    $koneksi = mysqli_connect($host, $user, $pass, $db);
+                                    global $conn;
+                                    $ambil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id_menu='$id_menu'");
+                                    $pecah = $ambil->fetch_assoc();
+                                    $subharga = $pecah["harga"] * $jumlah;
+                                    ?>
                             <tr>
                                 <td><?php echo $nomor; ?></td>
                                 <td><?php echo $pecah["nama_menu"]; ?></td>
@@ -137,37 +129,47 @@ if (!isset($_SESSION['login_user'])) {
                             </tr>
                         </tfoot>
                     </table><br>
+
+
                     <form method="POST" action="">
+                        <input type="text" value="<?php echo $_SESSION['login_user']; ?>" name="user">
+                        <input type="text" value='0' name="statuss">
+                        <input type="text" name="bukti_pembayaran" value="Belum Melakukan Pembayaran" id="">
                         <a href="menu_pembeli.php" class="btn btn-primary btn-sm">Lihat Menu</a>
-                        <button class="btn btn-success btn-sm" name="konfirm">Konfirmasi Pesanan</button>
+                        <button class="btn btn-success btn-sm" type="submit" name="konfirm">Konfirmasi Pesanan</button>
 
                     </form>
 
                     <?php
-            if (isset($_POST['konfirm'])) {
-              $tanggal_pemesanan = date("Y-m-d");
 
-              // Menyimpan data ke tabel pemesanan
-              $insert = mysqli_query($koneksi, "INSERT INTO pemesanan (tanggal_pemesanan, total_belanja) VALUES ('$tanggal_pemesanan', '$totalbelanja')");
+                        if (isset($_POST['konfirm'])) {
+                            $statuss = $_POST['statuss'];
+                            $user = $_POST['user'];
+                            $bukti_pembayaran = $_POST['bukti_pembayaran'];
+                            $tanggal_pemesanan = date("Y-m-d");
 
-              // Mendapatkan ID barusan
-              $id_terbaru = $koneksi->insert_id;
 
-              // Menyimpan data ke tabel pemesanan produk
-              foreach ($_SESSION["pesanan"] as $id_menu => $jumlah) {
-                $insert = mysqli_query($koneksi, "INSERT INTO pemesanan_produk (id_pemesanan, id_menu, jumlah) 
+                            // Menyimpan data ke tabel pemesanan
+                            $insert = mysqli_query($koneksi, "INSERT INTO pemesanan (tanggal_pemesanan, total_belanja, statuss, user, bukti_pembayaran) VALUES ('$tanggal_pemesanan', '$totalbelanja', '$statuss', '$user', '$bukti_pembayaran')");
+
+                            // Mendapatkan ID barusan
+                            $id_terbaru = $koneksi->insert_id;
+
+                            // Menyimpan data ke tabel pemesanan produk
+                            foreach ($_SESSION["pesanan"] as $id_menu => $jumlah) {
+                                $insert = mysqli_query($koneksi, "INSERT INTO pemesanan_produk (id_pemesanan, id_menu, jumlah) 
               VALUES ('$id_terbaru', '$id_menu', '$jumlah') ");
-              }
+                            }
 
 
-              // Mengosongkan pesanan
-              unset($_SESSION["pesanan"]);
+                            // Mengosongkan pesanan
+                            unset($_SESSION["pesanan"]);
 
-              // Dialihkan ke halaman nota
-              echo "<script>alert('Pemesanan Sukses!');</script>";
-              echo "<script>location= 'menu_pembeli.php'</script>";
-            }
-            ?>
+                            // Dialihkan ke halaman nota
+                            echo "<script>alert('Pemesanan Sukses!');</script>";
+                            echo "<script>location= 'menu_pembeli.php'</script>";
+                        }
+                        ?>
                 </div>
 
                 <!-- Akhir Menu -->

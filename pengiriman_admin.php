@@ -55,9 +55,6 @@ if (!isset($_SESSION['login_user'])) {
                         <a href="pesanan.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px;  padding:15px">Pesanan</a>
-                        <a href="pengiriman_admin.php"
-                            class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
-                            style="border: 0px;  padding:15px">Pengiriman</a>
                         <a href="About.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px;  padding:15px">About</a>
@@ -69,16 +66,6 @@ if (!isset($_SESSION['login_user'])) {
             </div>
 
             <div class="col-10" style="background-color: #CCF5FC">
-                <!-- Jumbotron -->
-                <!-- <div class="jumbotron jumbotron-fluid text-center" style="background-color: #CCF5FC; ">
-                    <div class="container">
-                        <h1 class="display-8"><span class="font-weight-bold">RESTORAN KELONGTONG BARU</span></h1>
-                        <hr>
-                        <p class="lead font-weight-bold">"Selamat Datang di Beranda Admin"</p>
-                    </div>
-                </div> -->
-                <!-- Akhir Jumbotron -->
-                <!-- Menu -->
                 <div class="card card-danger card-outline card-outline-tabs">
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -86,14 +73,14 @@ if (!isset($_SESSION['login_user'])) {
                                 <a class="nav-link text-dark px-3 active" id="manifest-tab" data-toggle="pill"
                                     href="#manifest-tab-content" role="tab" aria-controls="manifest-tab-content"
                                     aria-selected="true">
-                                    <i class="fas fa-tasks mr-2"></i> Pesanan
+                                    <i class="fas fa-tasks mr-2"></i> Dalam Perjalanan
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" id="history-manifest-tab" data-toggle="pill"
                                     href="#history-manifest-tab-content" role="tab"
                                     aria-controls="history-manifest-tab-content" aria-selected="false"><i
-                                        class="fas fa-history mr-2"></i> History Pesanan</a>
+                                        class="fas fa-history mr-2"></i>Barang Telah Sampai</a>
                             </li>
                         </ul>
                     </div>
@@ -108,42 +95,33 @@ if (!isset($_SESSION['login_user'])) {
                                             <th scope="col">ID Pemesanan</th>
                                             <th scope="col">Tanggal Pesan</th>
                                             <th scope="col">Total Bayar</th>
-                                            <th scope="col">Status</th>
                                             <th scope="col">User</th>
-                                            <th scope="col">St</th>
-                                            <th scope="col">Bukti Pembayaran</th>
-                                            <th scope="col">Opsi</th>
+                                            <th scope="col">Status Pengiriman</th>
+                                            <th></th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $nomor = 1; ?>
                                         <?php
-                                            $ambil = mysqli_query($koneksi, 'SELECT * FROM pemesanan');
+                                            $ambil = mysqli_query($koneksi, 'SELECT * FROM pengiriman');
                                             $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
                                             ?>
                                         <?php foreach ($result as $result) : ?>
                                         <tr>
                                             <th scope="row"><?php echo $nomor; ?></th>
-                                            <td><?php echo $result["id_pemesanan"]; ?></td>
-                                            <td><?php echo $result["tanggal_pemesanan"]; ?></td>
-                                            <td>Rp. <?php echo number_format($result["total_belanja"]); ?></td>
-                                            <td><?php echo $result['statuss']; ?></td>
-                                            <td><?php echo $result['user']; ?></td>
+                                            <td><?php echo $result["id"]; ?></td>
+                                            <td><?php echo $result["tgl_pesan"]; ?></td>
+                                            <td>Rp. <?php echo number_format($result["total"]); ?></td>
+                                            <td><?php echo $result["user"]; ?></td>
+                                            <td><?php echo $result['status'] == 1 ? 'Barang Telah Sampai' : 'Barang Sedang Dikirim' ?>
+                                            </td>
                                             <td><button
-                                                    class="btn btn-xs <?= $result['statuss'] == 1 ? 'btn-success' : 'btn-danger' ?> "><i
-                                                        class="fa <?= $result['statuss'] == 1 ? 'fa-check-circle' : 'fa-ban' ?>"></i></button>
+                                                    class="btn btn-xs <?= $result['status'] == 1 ? 'btn-success' : 'btn-warning' ?> "><i
+                                                        class="fa <?= $result['status'] == 1 ? 'fa-check-circle' : 'fa-truck' ?>"></i></button></button>
                                             </td>
-                                            <td><?php echo $result['bukti_pembayaran']; ?></td>
-                                            <td>
-                                                <a href=" detail_pesanan.php?id=<?php echo $result['id_pemesanan'] ?>"
-                                                    class="badge badge-primary">Detail</a>
-                                                <a href="clear_pesanan.php?id=<?php echo $result['id_pemesanan'] ?>"
-                                                    class="badge badge-danger">Hapus Data</a>
-                                                <a href="laporan.php?id=<?php echo $result['id_pemesanan'] ?>"
-                                                    class="badge badge-success" target="_blank">Cetak</a>
-                                                <a href="packing.php?id=<?php echo $result['id_pemesanan'] ?>"
-                                                    class="badge badge-warning">packing</a>
-                                            </td>
+                                            <td><a href="laporan.php?id=<?php echo $result['id'] ?>"
+                                                    class="badge badge-success" target="_blank">Cetak</a></td>
                                         </tr>
                                         <?php $nomor++; ?>
                                         <?php endforeach; ?>
@@ -159,45 +137,18 @@ if (!isset($_SESSION['login_user'])) {
                                             <th scope="col">ID</th>
                                             <th scope="col">Tanggal Pesan</th>
                                             <th scope="col">Total Bayar</th>
-                                            <th scope="col">User</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                            $ambil = mysqli_query($koneksi, 'SELECT * FROM packing');
-                                            $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
-                                            ?>
-                                        <?php foreach ($result as $result) : ?>
-                                        <tr>
-                                            <td><?php echo $result["id"]; ?></td>
-                                            <td><?php echo $result["tgl_pesan"]; ?></td>
-                                            <td>Rp. <?php echo number_format($result["total"]); ?></td>
-                                            <td><?php echo $result["user"]; ?></td>
 
-                                            <td>
-                                                <a href="laporan.php?id=<?php echo $result['id'] ?>"
-                                                    class="badge badge-success" target="_blank">Cetak</a>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
 
                         </div>
                     </div>
-
-                    <!-- /.card -->
                 </div>
-
-
-
-                <!-- <div class="container"> -->
-
-                <!-- </div> -->
-                <!-- Akhir Menu -->
-
             </div>
         </div>
     </div>

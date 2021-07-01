@@ -21,15 +21,11 @@ if (!isset($_SESSION['login_user'])) {
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 
     <title>Restoran Dessert Kelongtong</title>
 </head>
 
 <body>
-
     <header class="bg-danger" style=" height: 70px;">
         <div class="atas">
             <H3
@@ -46,21 +42,24 @@ if (!isset($_SESSION['login_user'])) {
                 <div style="height: 1500px;" class="bg-danger">
                     <div class="list-group "
                         style="padding-top: 20px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;">
-                        <a href="admin.php"
+                        <a href="user.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px;  padding:15px">Home</a>
-                        <a href="daftar_menu.php"
+                        <a href="menu_pembeli.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px; padding:15px">Daftar Menu</a>
-                        <a href="pesanan.php"
+                        <a href="pesanan_pembeli.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
-                            style="border: 0px;  padding:15px">Pesanan</a>
-                        <a href="pengiriman_admin.php"
-                            class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
-                            style="border: 0px;  padding:15px">Pengiriman</a>
+                            style="border: 0px;  padding:15px">Pesanan Anda</a>
                         <a href="About.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px;  padding:15px">About</a>
+                        <a href="bayar.php"
+                            class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
+                            style="border: 0px;  padding:15px">Bayar</a>
+                        <a href="pengiriman.php"
+                            class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
+                            style="border: 0px;  padding:15px">Pengiriman</a>
                         <a href="logout.php"
                             class="list-group-item list-group-item-action bg-danger text-light fw-bolder fs-4"
                             style="border: 0px;  padding:15px">Logout</a>
@@ -69,81 +68,60 @@ if (!isset($_SESSION['login_user'])) {
             </div>
 
             <div class="col-10" style="background-color: #CCF5FC">
-                <!-- Jumbotron -->
-                <!-- <div class="jumbotron jumbotron-fluid text-center" style="background-color: #CCF5FC; ">
-                    <div class="container">
-                        <h1 class="display-8"><span class="font-weight-bold">RESTORAN KELONGTONG BARU</span></h1>
-                        <hr>
-                        <p class="lead font-weight-bold">"Selamat Datang di Beranda Admin"</p>
-                    </div>
-                </div> -->
-                <!-- Akhir Jumbotron -->
-                <!-- Menu -->
-                <div class="card card-danger card-outline card-outline-tabs">
-                    <div class="card-header p-0 border-bottom-0">
-                        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark px-3 active" id="manifest-tab" data-toggle="pill"
-                                    href="#manifest-tab-content" role="tab" aria-controls="manifest-tab-content"
-                                    aria-selected="true">
-                                    <i class="fas fa-tasks mr-2"></i> Pesanan
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" id="history-manifest-tab" data-toggle="pill"
-                                    href="#history-manifest-tab-content" role="tab"
-                                    aria-controls="history-manifest-tab-content" aria-selected="false"><i
-                                        class="fas fa-history mr-2"></i> History Pesanan</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
+                <div class="col-10" style="background-color: #CCF5FC">
+                    <div class="card card-danger card-outline card-outline-tabs">
+                        <div class="card-header p-0 border-bottom-0">
+                            <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark px-3 active" id="manifest-tab" data-toggle="pill"
+                                        href="#manifest-tab-content" role="tab" aria-controls="manifest-tab-content"
+                                        aria-selected="true">
+                                        <i class="fas fa-tasks mr-2"></i> Dalam Perjalanan
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" id="history-manifest-tab" data-toggle="pill"
+                                        href="#history-manifest-tab-content" role="tab"
+                                        aria-controls="history-manifest-tab-content" aria-selected="false"><i
+                                            class="fas fa-history mr-2"></i>Barang Telah Sampai</a>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="tab-content" id="">
                             <div class="tab-pane fade active show" id="manifest-tab-content" role="tabpanel"
                                 aria-labelledby="manifest-tab">
-                                <table class="table table-bordered" id="example">
+                                <table class="table table-striped" id="pengiriman">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">No.</th>
                                             <th scope="col">ID Pemesanan</th>
                                             <th scope="col">Tanggal Pesan</th>
                                             <th scope="col">Total Bayar</th>
-                                            <th scope="col">Status</th>
                                             <th scope="col">User</th>
-                                            <th scope="col">St</th>
-                                            <th scope="col">Bukti Pembayaran</th>
-                                            <th scope="col">Opsi</th>
+                                            <th scope="col">Status Pengiriman</th>
+                                            <th></th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $nomor = 1; ?>
                                         <?php
-                                            $ambil = mysqli_query($koneksi, 'SELECT * FROM pemesanan');
+                                            $ambil = mysqli_query($koneksi, "SELECT * FROM pengiriman WHERE user='$_SESSION[login_user]'");
                                             $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
                                             ?>
                                         <?php foreach ($result as $result) : ?>
                                         <tr>
                                             <th scope="row"><?php echo $nomor; ?></th>
-                                            <td><?php echo $result["id_pemesanan"]; ?></td>
-                                            <td><?php echo $result["tanggal_pemesanan"]; ?></td>
-                                            <td>Rp. <?php echo number_format($result["total_belanja"]); ?></td>
-                                            <td><?php echo $result['statuss']; ?></td>
-                                            <td><?php echo $result['user']; ?></td>
-                                            <td><button
-                                                    class="btn btn-xs <?= $result['statuss'] == 1 ? 'btn-success' : 'btn-danger' ?> "><i
-                                                        class="fa <?= $result['statuss'] == 1 ? 'fa-check-circle' : 'fa-ban' ?>"></i></button>
+                                            <td><?php echo $result["id"]; ?></td>
+                                            <td><?php echo $result["tgl_pesan"]; ?></td>
+                                            <td>Rp. <?php echo number_format($result["total"]); ?></td>
+                                            <td><?php echo $result["user"]; ?></td>
+                                            <td><?php echo $result['status'] == 1 ? 'Barang Telah Sampai' : 'Barang Sedang Dikirim' ?>
                                             </td>
-                                            <td><?php echo $result['bukti_pembayaran']; ?></td>
-                                            <td>
-                                                <a href=" detail_pesanan.php?id=<?php echo $result['id_pemesanan'] ?>"
-                                                    class="badge badge-primary">Detail</a>
-                                                <a href="clear_pesanan.php?id=<?php echo $result['id_pemesanan'] ?>"
-                                                    class="badge badge-danger">Hapus Data</a>
-                                                <a href="laporan.php?id=<?php echo $result['id_pemesanan'] ?>"
-                                                    class="badge badge-success" target="_blank">Cetak</a>
-                                                <a href="packing.php?id=<?php echo $result['id_pemesanan'] ?>"
-                                                    class="badge badge-warning">packing</a>
-                                            </td>
+                                            <td><button class="btn btn-sm btn-warning"><i
+                                                        class="fa fa-truck"></i></button></td>
+                                            <td><a href="laporan.php?id=<?php echo $result['id'] ?>"
+                                                    class="badge badge-success" target="_blank">Detail Barang</a></td>
                                         </tr>
                                         <?php $nomor++; ?>
                                         <?php endforeach; ?>
@@ -159,55 +137,34 @@ if (!isset($_SESSION['login_user'])) {
                                             <th scope="col">ID</th>
                                             <th scope="col">Tanggal Pesan</th>
                                             <th scope="col">Total Bayar</th>
-                                            <th scope="col">User</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                            $ambil = mysqli_query($koneksi, 'SELECT * FROM packing');
-                                            $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
-                                            ?>
-                                        <?php foreach ($result as $result) : ?>
-                                        <tr>
-                                            <td><?php echo $result["id"]; ?></td>
-                                            <td><?php echo $result["tgl_pesan"]; ?></td>
-                                            <td>Rp. <?php echo number_format($result["total"]); ?></td>
-                                            <td><?php echo $result["user"]; ?></td>
 
-                                            <td>
-                                                <a href="laporan.php?id=<?php echo $result['id'] ?>"
-                                                    class="badge badge-success" target="_blank">Cetak</a>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
 
                         </div>
                     </div>
-
-                    <!-- /.card -->
                 </div>
 
 
 
-                <!-- <div class="container"> -->
 
-                <!-- </div> -->
-                <!-- Akhir Menu -->
+
+
 
             </div>
         </div>
     </div>
+    <!-- Akhir Menu -->
+    </div>
 
-
-
-
-
-
-
+    </div>
+    </div>
+    </div>
 
     <footer class="bg-danger" style=" height: 70px;">
         <div class="atas">
@@ -216,6 +173,12 @@ if (!isset($_SESSION['login_user'])) {
             <img src="images/smile.png" class="mr-1 ml-2" data-toggle="tooltip" title="Facebook">
         </div>
     </footer>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#pengiriman').DataTable();
+    });
+    </script>
 
 
 
@@ -234,17 +197,10 @@ if (!isset($_SESSION['login_user'])) {
     </script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-        $('#history').DataTable();
-
-    });
-    </script>
 </body>
 
 </html>
-<?php } ?>
+
+<?php
+}
+?>
