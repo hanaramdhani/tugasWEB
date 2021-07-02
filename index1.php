@@ -1,3 +1,7 @@
+<?php
+include 'koneksi.php';
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -35,7 +39,7 @@
                                 <h3>Login to <strong>Colorlib</strong></h3>
                                 <!-- <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p> -->
                             </div>
-                            <form action="#" method="post">
+                            <form method="POST" action="">
                                 <div class="form-group first">
                                     <label for="username">Username</label>
                                     <input type="text" class="form-control" placeholder="your-email@gmail.com" id="username">
@@ -49,14 +53,45 @@
                                     <small><a href="register1.php">Belum Punya Akun ? Buat Akun Anda !</a></small>
                                 </div>
 
-                                <input type="submit" value="Log In" class="btn btn-block btn-primary">
+                                <input type="submit" name="submit" value="Log In" class="btn btn-block btn-primary">
+
 
                             </form>
+                            <!-- Eksekusi Form Login -->
+                            <?php
+                            if (isset($_POST['submit'])) {
+                                $user = $_POST['username'];
+                                $password = $_POST['password'];
+
+                                // Query untuk memilih tabel
+                                $cek_data = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$user' AND password = '$password'");
+                                $hasil = mysqli_fetch_array($cek_data);
+                                $status = $hasil['status'];
+                                $login_user = $hasil['username'];
+                                $row = mysqli_num_rows($cek_data);
+
+                                // Pengecekan Kondisi Login Berhasil/Tidak
+                                if ($row > 0) {
+                                    session_start();
+                                    $_SESSION['login_user'] = $login_user;
+
+                                    if ($status == 'admin') {
+                                        echo "<script> alert ('Login Berhasil!');document.location.href='admin.php'</script>";
+                                    } elseif ($status == 'pelanggan') {
+                                        echo "<script> alert ('Login Berhasil!');document.location.href='user.php'</script>";
+                                    }
+                                } else {
+                                    echo "<script> alert ('Login Gagal, Username atau Password salah!');document.location.href='index1.php'</script>";
+                                }
+                            }
+                            ?>
                         </div>
+                        <!-- Akhir Eksekusi Form Login -->
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
     </div>

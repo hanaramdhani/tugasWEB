@@ -268,6 +268,7 @@ if (!isset($_SESSION['login_user'])) {
                                                 <th scope="col">Status Pengiriman</th>
                                                 <th></th>
                                                 <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -285,8 +286,10 @@ if (!isset($_SESSION['login_user'])) {
                                                     <td><?php echo $result["user"]; ?></td>
                                                     <td><?php echo $result['status'] == 1 ? 'Barang Telah Sampai' : 'Barang Sedang Dikirim' ?>
                                                     </td>
+
                                                     <td><button class="btn btn-sm btn-warning"><i class="fa fa-truck"></i></button></td>
                                                     <td><a href="laporan.php?id=<?php echo $result['id'] ?>" class="badge badge-success" target="_blank">Detail Barang</a></td>
+                                                    <td><a href="detail.php?id=<?php echo $result['id'] ?>" class="badge badge-success">Detail</a></td>
                                                 </tr>
                                                 <?php $nomor++; ?>
                                             <?php endforeach; ?>
