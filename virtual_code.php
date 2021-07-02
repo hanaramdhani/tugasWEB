@@ -1,3 +1,11 @@
+<?php
+include('koneksi.php');
+session_start();
+if (!isset($_SESSION['login_user'])) {
+    header("location: login.php");
+} else {
+?>
+
 <html>
 
 <head>
@@ -11,8 +19,15 @@
     </center>
 
     <?php
-    include 'koneksi.php';
-    ?>
+        $ambil = $koneksi->query("SELECT * FROM pemesanan WHERE id_pemesanan='$_GET[id]'");
+        ?>
+    <?php while ($pecah = $ambil->fetch_assoc()) { ?>
+
+    <h3> KODE PEMBAYARAN : HB9S - LQ8C - <?php echo $pecah['id_pemesanan']; ?></h3>
+
+
+    <?php } ?>
+
 
     <table class="table table-striped" style="width: 100%">
         <thead>
@@ -32,9 +47,9 @@
             <?php $nomor = 1; ?>
             <?php $totalbelanja = 0; ?>
             <?php
-            $ambil = $koneksi->query("SELECT * FROM pemesanan_produk JOIN produk ON pemesanan_produk.id_menu=produk.id_menu 
+                $ambil = $koneksi->query("SELECT * FROM pemesanan_produk JOIN produk ON pemesanan_produk.id_menu=produk.id_menu 
                 WHERE pemesanan_produk.id_pemesanan='$_GET[id]'");
-            ?>
+                ?>
             <?php while ($pecah = $ambil->fetch_assoc()) { ?>
             <?php $subharga1 = $pecah['harga'] * $pecah['jumlah']; ?>
             <tr>
@@ -71,3 +86,5 @@
 </body>
 
 </html>
+
+<?php } ?>
