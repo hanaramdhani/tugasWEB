@@ -183,20 +183,20 @@ if (!isset($_SESSION['login_user'])) {
               <div class="col-md-4 d-flex justify-content-end">
 
                 <div class="container text-center">
-                  <img src="images/hana1.jpg" width="80%" class="rounded-circle img-thumbnail">
+                  <img src="images/ayu.jpeg" width="80%" class="rounded-circle img-thumbnail">
+                  <h5 style="font-size: 15px;">Ayu CahyaBlindar(1810530123) <br>
+                    <p style="font-size: 12px; font-weight: bold;">Laporan</p>
+                  </h5>
+
+                </div>
+              </div>
+
+
+              <div class="col-md-4 d-flex justify-content-start">
+                <div class="container text-center">
+                  <img src="images/hana.jpg" width="80%" class="rounded-circle img-thumbnail">
                   <h5 style="font-size: 15px;">Hana Ramdhani(1810530121) <br>
-                    <p style="font-size: 12px; font-weight: bold;">BACK END Sisi Pelanggan</p>
-                  </h5>
-
-                </div>
-              </div>
-
-
-              <div class="col-md-4 d-flex justify-content-start">
-                <div class="container text-center">
-                  <img src="images/mahsus.jpg" width="80%" class="rounded-circle img-thumbnail">
-                  <h5 style="font-size: 15px;">Mahsus Afriandy(17105210109) <br>
-                    <p style="font-size: 12px; font-weight: bold;">FRONT END</p>
+                    <p style="font-size: 12px; font-weight: bold;">Programmer</p>
                   </h5>
 
 
@@ -206,7 +206,7 @@ if (!isset($_SESSION['login_user'])) {
                 <div class="container text-center">
                   <img src="images/de.jpg" width="80%" class="rounded-circle img-thumbnail">
                   <h5 style="font-size: 15px;">Regina Aprilia Riberu(1801530132) <br>
-                    <p style="font-size: 12px; font-weight: bold;">BACK END Sisi Admin</p>
+                    <p style="font-size: 12px; font-weight: bold;">Programmer</p>
                   </h5>
 
 
@@ -214,9 +214,9 @@ if (!isset($_SESSION['login_user'])) {
               </div>
               <div class="col-md-4 d-flex justify-content-start">
                 <div class="container text-center">
-                  <img src="images/de.jpg" width="80%" class="rounded-circle img-thumbnail">
-                  <h5 style="font-size: 15px;">Regina Aprilia Riberu(1801530132) <br>
-                    <p style="font-size: 12px; font-weight: bold;">BACK END Sisi Admin</p>
+                  <img src="images/selfi1.jpg" width="80%" class="rounded-circle img-thumbnail">
+                  <h5 style="font-size: 15px;">Selvi Winayati(1801530132) <br>
+                    <p style="font-size: 12px; font-weight: bold;">Logo Desaigner</p>
                   </h5>
 
 
@@ -231,9 +231,9 @@ if (!isset($_SESSION['login_user'])) {
               </div>
               <div class="col-md-4 d-flex justify-content-start">
                 <div class="container text-center">
-                  <img src="images/de.jpg" width="80%" class="rounded-circle img-thumbnail">
-                  <h5 style="font-size: 15px;">Regina Aprilia Riberu(1801530132) <br>
-                    <p style="font-size: 12px; font-weight: bold;">BACK END Sisi Admin</p>
+                  <img src="images/ulfa.jpg" width="80%" class="rounded-circle img-thumbnail">
+                  <h5 style="font-size: 15px;">Ulfayanti(1801530141) <br>
+                    <p style="font-size: 12px; font-weight: bold;">Flowchart</p>
                   </h5>
 
 

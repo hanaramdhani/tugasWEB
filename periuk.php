@@ -43,7 +43,7 @@ if (!isset($_SESSION['login_user'])) {
     <div class="wrapper">
 
       <!-- Navbar -->
-      <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #2979ff;">
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #795548;">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -66,7 +66,7 @@ if (!isset($_SESSION['login_user'])) {
       <!-- /.navbar -->
 
       <!-- Main Sidebar Container -->
-      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #1c313a;">
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #212121;">
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
           <img src="template/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -91,7 +91,7 @@ if (!isset($_SESSION['login_user'])) {
               <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
               <li class="nav-item has-treeview menu-open">
-                <a href="user.php" class="nav-link active">
+                <a href="user.php" class="nav-link ">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Home
@@ -103,7 +103,7 @@ if (!isset($_SESSION['login_user'])) {
               </li>
 
               <li class="nav-item has-treeview menu-open">
-                <a href="user.php" class="nav-link active">
+                <a href="user.php" class="nav-link ">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Daftar Produk
@@ -113,7 +113,7 @@ if (!isset($_SESSION['login_user'])) {
 
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="alatmakan.php" class="nav-link active">
+                    <a href="alatmakan.php" class="nav-link ">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Alat Makan</p>
                     </a>
@@ -269,7 +269,7 @@ if (!isset($_SESSION['login_user'])) {
                     <div class="row">
 
                       <div class="col-6">
-                        <a href=" beli.php?id_menu=<?php echo $result['id_menu']; ?>" class="btn btn-primary btn-sm btn-block btn-p1">BELI</a>
+                        <a href=" beli.php?id_menu=<?php echo $result['id_menu']; ?>" class="btn  btn-sm btn-block btn-p1" style="background-color: #795548; color: white;">BELI</a>
                       </div>
 
 

@@ -20,9 +20,9 @@
 
   <!-- Form Registrasi -->
   <div class="container">
-    <h3 class="text-center mt-3 mb-5">HALAMAN REGISTRASI</h3>
+    <h3 class="text-center mt-3 mb-5">HALAMAN REGISTRASI KARYAWAN</h3>
     <div class="card p-5 mb-5">
-      <form method="POST" action="simpan_register.php">
+      <form method="POST" action="simpan_registerKaryawan.php">
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="user">Username</label>
@@ -61,23 +61,21 @@
             <label for="telp">No. Telephone</label>
             <input type="text" class="form-control" id="telp" name="hp" placeholder="No. Telephone">
           </div>
-          <!-- <div class="form-group col-md-4">
-          <label for="sts">Status Registrasi</label>
-          <select id="sts" class="form-control" name="status">
-            <option selected>Pilih...</option>
-            <option value="pelanggan">Pelanggan</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div> -->
-          <div class="form-group">
-            <label for="sts">Status</label>
-            <input type="text" class="form-control" id="sts" name="status" disabled value="Pelanggan">
+          <div class="form-group col-md-4">
+            <label for="sts">Status </label>
+            <select id="sts" class="form-control" name="status">
+              <option selected>Pilih...</option>
+             
+              <option value="admin">Admin</option>
+              <option value="pelayan">Pelayan</option>
+              <option value="kasir">Kasir</option>
+            </select>
           </div>
         </div>
-        <button type="register" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary" name="tambah">Tambah</button>
         <button type="reset" class="btn btn-danger">Reset</button>
       </form>
-      
+    
     </div>
   </div>
   <!-- Akhir Form Registrasi -->
