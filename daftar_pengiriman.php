@@ -4,7 +4,6 @@ session_start();
 if (!isset($_SESSION['login_user'])) {
     header("location: login.php");
 } else {
-
     // print_r($_SESSION['login_user']);
 ?>
 
@@ -37,7 +36,6 @@ if (!isset($_SESSION['login_user'])) {
         <link rel="stylesheet" href="template/plugins/summernote/summernote-bs4.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     </head>
 
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -51,10 +49,10 @@ if (!isset($_SESSION['login_user'])) {
                         <a class="nav-link" data-widget="pushmenu" href="#" style="color: white;"><i class="fas fa-bars"></i></a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="user.php" class="nav-link" style="color: white;">Home</a>
+                        <a href="admin.php" class="nav-link" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="About.php" class="nav-link" style="color: white;">Contact</a>
+                        <a href="Aboutuser.php" class="nav-link" style="color: white;">Contact</a>
                     </li>
                 </ul>
 
@@ -90,18 +88,16 @@ if (!isset($_SESSION['login_user'])) {
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li class="nav-item has-treeview menu-open">
-                                <a href="user.php" class="nav-link active">
+                                <a href="admin.php" class="nav-link active">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
                                         Home
                                         <i class=""></i>
                                     </p>
                                 </a>
+                            </li>
                         </ul>
                     </nav>
-
-
-
 
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -109,87 +105,26 @@ if (!isset($_SESSION['login_user'])) {
          with font-awesome or any other icon font library -->
 
 
-                            <li class="nav-item has-treeview menu-open">
-                                <a href="user.php" class="nav-link active">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Daftar Produk
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="alatmakan.php" class="nav-link active">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Alat Makan</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="cangkir.php" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Cangkir Keramik</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="elektronik.php" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Elektronik</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="gelaskaca.php" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Gelas Kaca</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="mangkukkaca.php" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Mangkuk Kaca</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="periuk.php" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Periuk</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="rantang.php" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Rantang</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="toplesplastik.php" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Toples Plastik</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
                             <li class="nav-item">
-                                <a href="pesanan_pembeli.php" class="nav-link">
+                                <a href="halamanproduk.php" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Daftar Produk</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pesanan.php" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>Pesanan</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pembayaran.php" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>Pembayaran</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pengiriman.php" class="nav-link">
+                                <a href="daftar_pengiriman.php" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>Pengiriman</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="Aboutuser.php" class="nav-link">
+                                <a href="About.php" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>About</p>
                                 </a>
@@ -221,7 +156,7 @@ if (!isset($_SESSION['login_user'])) {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-12">
-                                <h1 class="m-0 text-black text-center">RESTORAN DESSERT KELONGTONG</h1>
+                                <h1 class="m-0 text-black text-center">DAFTAR PENGIRIMAN</h1>
 
                             </div><!-- /.col -->
 
@@ -233,12 +168,17 @@ if (!isset($_SESSION['login_user'])) {
                 <!-- Main content -->
 
 
+                <!-- Jumbotron -->
+                <!-- <div class="jumbotron jumbotron-fluid text-center" style="background-color: #CCF5FC; ">
+              <div class="container">
+                  <h1 class="display-8"><span class="font-weight-bold">RESTORAN KELONGTONG BARU</span></h1>
+                  <hr>
+                  <p class="lead font-weight-bold">"Selamat Datang di Beranda Admin"</p>
+              </div>
+          </div> -->
+                <!-- Akhir Jumbotron -->
                 <!-- Menu -->
-
                 <div class="container">
-
-
-
                     <div class="card card-danger card-outline card-outline-tabs">
                         <div class="card-header p-0 border-bottom-0">
                             <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -252,14 +192,12 @@ if (!isset($_SESSION['login_user'])) {
                                 </li>
                             </ul>
                         </div>
-                        <div class="container">
-                            <br>
+                        <div class="card-body">
                             <div class="tab-content" id="">
                                 <div class="tab-pane fade active show" id="manifest-tab-content" role="tabpanel" aria-labelledby="manifest-tab">
-
-                                    <table class="table table-bordered" id="pengiriman">
-                                        <thead class="thead-light">
-                                            <tr class="text-center">
+                                    <table class="table table-bordered" id="example">
+                                        <thead class="thead-dark">
+                                            <tr>
                                                 <th scope="col">No.</th>
                                                 <th scope="col">ID Pemesanan</th>
                                                 <th scope="col">Tanggal Pesan</th>
@@ -273,7 +211,7 @@ if (!isset($_SESSION['login_user'])) {
                                         <tbody>
                                             <?php $nomor = 1; ?>
                                             <?php
-                                            $ambil = mysqli_query($koneksi, "SELECT * FROM pengiriman WHERE user='$_SESSION[login_user]'");
+                                            $ambil = mysqli_query($koneksi, 'SELECT * FROM pengiriman');
                                             $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
                                             ?>
                                             <?php foreach ($result as $result) : ?>
@@ -285,15 +223,15 @@ if (!isset($_SESSION['login_user'])) {
                                                     <td><?php echo $result["user"]; ?></td>
                                                     <td><?php echo $result['status'] == 1 ? 'Barang Telah Sampai' : 'Barang Sedang Dikirim' ?>
                                                     </td>
-                                                    <td><button class="btn btn-sm btn-warning"><i class="fa fa-truck"></i></button></td>
-                                                    <td><a href="laporan.php?id=<?php echo $result['id'] ?>" class="badge badge-success" target="_blank">Detail Barang</a></td>
+                                                    <td><a href="histori_pengiriman.php" class="btn btn-xs <?= $result['status'] == 1 ? 'btn-success' : 'btn-warning' ?> "><i class="fa <?= $result['status'] == 1 ? 'fa-check-circle' : 'fa-truck' ?>"></i></a>
+                                                    </td>
+                                                    <td><a href="laporan.php?id=<?php echo $result['id'] ?>" class="btn btn-info btn-xs " target="_blank"><i class="fa fa-print"></i></a></td>
                                                 </tr>
                                                 <?php $nomor++; ?>
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
-                                <br>
 
                                 <div class="tab-pane fade active" id="history-manifest-tab-content" role="tabpanel" aria-labelledby="manifest-tab">
                                     <table class="table table-bordered" id="history">
@@ -310,9 +248,9 @@ if (!isset($_SESSION['login_user'])) {
                                         </tbody>
                                     </table>
                                 </div>
+
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <!-- Akhir Menu -->
@@ -339,54 +277,27 @@ if (!isset($_SESSION['login_user'])) {
         <!-- ./wrapper -->
 
 
-
-
-        <!-- jQuery -->
-        <script src="template/plugins/jquery/jquery.min.js"></script>
-        <!-- jQuery UI 1.11.4 -->
-        <script src="template/plugins/jquery-ui/jquery-ui.min.js"></script>
-        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-        <script>
-            $.widget.bridge('uibutton', $.ui.button)
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
         </script>
-        <!-- Bootstrap 4 -->
-        <script src="template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- ChartJS -->
-        <script src="template/plugins/chart.js/Chart.min.js"></script>
-        <!-- Sparkline -->
-        <script src="template/plugins/sparklines/sparkline.js"></script>
-        <!-- JQVMap -->
-        <script src="template/plugins/jqvmap/jquery.vmap.min.js"></script>
-        <script src="template/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-        <!-- jQuery Knob Chart -->
-        <script src="template/plugins/jquery-knob/jquery.knob.min.js"></script>
-        <!-- daterangepicker -->
-        <script src="template/plugins/moment/moment.min.js"></script>
-        <script src="template/plugins/daterangepicker/daterangepicker.js"></script>
-        <!-- Tempusdominus Bootstrap 4 -->
-        <script src="template/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-        <!-- Summernote -->
-        <script src="template/plugins/summernote/summernote-bs4.min.js"></script>
-        <!-- overlayScrollbars -->
-        <script src="template/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="template/dist/js/adminlte.js"></script>
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="template/dist/js/pages/dashboard.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="template/dist/js/demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+        </script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
         <script>
             $(document).ready(function() {
-                $('#pengiriman').DataTable();
+                $('#example').DataTable();
+                $('#history').DataTable();
+
             });
         </script>
-
     </body>
 
     </html>
-
-<?php
-}
-?>
+<?php } ?>

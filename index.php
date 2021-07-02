@@ -27,12 +27,12 @@ include 'koneksi.php';
   </div> -->
   <!-- Form Login -->
 
-  <div class="container" style="background-color: #DA2525; color: #ffff;" >
-    
+  <div class="container" style="background-color: #DA2525; color: #ffff;">
+
     <h4 style="text-align: left;  ">Log in</h4>
     <h6 style="text-align: left;  ">ini cepat dan mudah</h6>
     <hr style="height:1px;border:none;color:#333;background-color:#ffff;">
-    <form method="POST" action="" >
+    <form method="POST" action="">
       <div class="form-group">
         <label for="exampleInputEmail1">Username</label>
         <div class="input-group">
@@ -79,10 +79,8 @@ include 'koneksi.php';
 
         if ($status == 'admin') {
           echo "<script> alert ('Login Berhasil!');document.location.href='admin.php'</script>";
-         
         } elseif ($status == 'pelanggan') {
           echo "<script> alert ('Login Berhasil!');document.location.href='user.php'</script>";
-        
         }
       } else {
         echo "<script> alert ('Login Gagal, Username atau Password salah!');document.location.href='index.php'</script>";

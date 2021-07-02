@@ -15,7 +15,6 @@ if (!isset($_SESSION['login_user'])) {
     <title>AdminLTE 3 | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="template/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -36,9 +35,6 @@ if (!isset($_SESSION['login_user'])) {
     <link rel="stylesheet" href="template/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
-    <script src="template/jquery-3.6.0.min.js"></script>
-    <script src="template/sweetalert2.all.min.js"></script>
   </head>
 
   <body class="hold-transition sidebar-mini layout-fixed">
@@ -98,8 +94,10 @@ if (!isset($_SESSION['login_user'])) {
                     <i class=""></i>
                   </p>
                 </a>
+              </li>
             </ul>
           </nav>
+
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class
@@ -166,9 +164,8 @@ if (!isset($_SESSION['login_user'])) {
                   </li>
                 </ul>
               </li>
-
               <li class="nav-item">
-                <a href="pesanan_pembeli.php" class="nav-link">
+                <a href="pesanan.php" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
                   <p>Pesanan</p>
                 </a>
@@ -218,7 +215,7 @@ if (!isset($_SESSION['login_user'])) {
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-12">
-                <h1 class="m-0 text-black text-center">DAFTAR PESANAN ANDA</h1>
+                <h1 class="m-0 text-black text-center">TENTANG KAMI</h1>
 
               </div><!-- /.col -->
 
@@ -228,7 +225,6 @@ if (!isset($_SESSION['login_user'])) {
         <!-- /.content-header -->
 
         <!-- Main content -->
-
 
         <!-- Jumbotron -->
         <!-- <div class="jumbotron jumbotron-fluid text-center" style="background-color: #CCF5FC; ">
@@ -241,150 +237,85 @@ if (!isset($_SESSION['login_user'])) {
         <!-- Akhir Jumbotron -->
         <!-- Menu -->
 
-
         <div class="container">
-          <div class="card card-primary card-outline">
-            <div class="card-body">
-              <table class="table table-bordered" id="example">
-                <thead class="thead-light">
-                  <tr class="text-center">
-                    <th scope="col">No</th>
-                    <th scope="col">Nama Pesanan</th>
-                    <th scope="col">Harga</th>
-                    <th scope="col">Jumlah</th>
-                    <th scope="col">Subharga</th>
-                    <th scope="col">Opsi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php $nomor = 1; ?>
-                  <?php $totalbelanja = 0; ?>
-                  <?php foreach ($_SESSION["pesanan"] as $id_menu => $jumlah) : ?>
+          <div class="judul text-center mt-5">
 
-                    <?php
-                    // include('koneksi.php');
-                    $host = "localhost";
-                    $user = "root";
-                    $pass = "";
-                    $db = "database_kue";
+            <div class="row mb-5 mt-5 ">
+              <div class="col-md-4 d-flex justify-content-end">
 
-                    $koneksi = mysqli_connect($host, $user, $pass, $db);
-                    global $conn;
-                    $ambil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id_menu='$id_menu'");
-                    $pecah = $ambil->fetch_assoc();
-                    $subharga = $pecah["harga"] * $jumlah;
-                    ?>
-                    <tr>
-                      <td class="text-center"><?php echo $nomor; ?></td>
-                      <td><?php echo $pecah["nama_menu"]; ?></td>
-                      <td class="text-center">Rp. <?php echo number_format($pecah["harga"]); ?></td>
-                      <td class="text-center"><?php echo $jumlah; ?></td>
-                      <td class="text-center">Rp. <?php echo number_format($subharga); ?></td>
-                      <td class="text-center">
-                        <a href="hapus_pesanan.php?id_menu=<?php echo $id_menu ?>" class="btn btn-danger btn-xs btn-hapuspesan"><i class="fa fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <?php $nomor++; ?>
-                    <?php $totalbelanja += $subharga; ?>
-                  <?php endforeach ?>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th colspan="4">Total Belanja</th>
-                    <th colspan="2">Rp. <?php echo number_format($totalbelanja) ?></th>
-                  </tr>
-                </tfoot>
-              </table>
+                <div class="container text-center">
+                  <img src="images/hana1.jpg" width="80%" class="rounded-circle img-thumbnail">
+                  <h5 style="font-size: 15px;">Hana Ramdhani(1810530121) <br>
+                    <p style="font-size: 12px; font-weight: bold;">BACK END Sisi Pelanggan</p>
+                  </h5>
+
+                </div>
+              </div>
+
+
+              <div class="col-md-4 d-flex justify-content-start">
+                <div class="container text-center">
+                  <img src="images/mahsus.jpg" width="80%" class="rounded-circle img-thumbnail">
+                  <h5 style="font-size: 15px;">Mahsus Afriandy(17105210109) <br>
+                    <p style="font-size: 12px; font-weight: bold;">FRONT END</p>
+                  </h5>
+
+
+                </div>
+              </div>
+              <div class="col-md-4 d-flex justify-content-start">
+                <div class="container text-center">
+                  <img src="images/de.jpg" width="80%" class="rounded-circle img-thumbnail">
+                  <h5 style="font-size: 15px;">Regina Aprilia Riberu(1801530132) <br>
+                    <p style="font-size: 12px; font-weight: bold;">BACK END Sisi Admin</p>
+                  </h5>
+
+
+                </div>
+              </div>
+              <div class="col-md-4 d-flex justify-content-start">
+                <div class="container text-center">
+                  <img src="images/de.jpg" width="80%" class="rounded-circle img-thumbnail">
+                  <h5 style="font-size: 15px;">Regina Aprilia Riberu(1801530132) <br>
+                    <p style="font-size: 12px; font-weight: bold;">BACK END Sisi Admin</p>
+                  </h5>
+
+
+                </div>
+              </div>
+              <div class="col-md-4 d-flex justify-content-start">
+                <div class="container text-center">
+
+
+
+                </div>
+              </div>
+              <div class="col-md-4 d-flex justify-content-start">
+                <div class="container text-center">
+                  <img src="images/de.jpg" width="80%" class="rounded-circle img-thumbnail">
+                  <h5 style="font-size: 15px;">Regina Aprilia Riberu(1801530132) <br>
+                    <p style="font-size: 12px; font-weight: bold;">BACK END Sisi Admin</p>
+                  </h5>
+
+
+                </div>
+              </div>
+
+
+
+
+
+
             </div>
           </div>
-          <br>
 
+          <!-- Akhir Menu -->
 
-          <form method="POST" action="">
-            <input type="text" value="<?php echo $_SESSION['login_user']; ?>" name="user">
-            <input type="text" value='0' name="statuss">
-            <input type="text" name="bukti_pembayaran" value="Belum Melakukan Pembayaran" id="">
-            <a href="alatmakan.php" class="btn btn-primary btn-sm">Lihat Menu</a>
-            <button class="btn btn-success btn-sm" type="submit" name="konfirm">Konfirmasi Pesanan</button>
-
-          </form>
-
-          <?php
-
-          if (isset($_POST['konfirm'])) {
-            $statuss = $_POST['statuss'];
-            $user = $_POST['user'];
-            $bukti_pembayaran = $_POST['bukti_pembayaran'];
-            $tanggal_pemesanan = date("Y-m-d");
-
-
-            // Menyimpan data ke tabel pemesanan
-            $insert = mysqli_query($koneksi, "INSERT INTO pemesanan (tanggal_pemesanan, total_belanja, statuss, user, bukti_pembayaran) VALUES ('$tanggal_pemesanan', '$totalbelanja', '$statuss', '$user', '$bukti_pembayaran')");
-
-            // Mendapatkan ID barusan
-            $id_terbaru = $koneksi->insert_id;
-
-            // Menyimpan data ke tabel pemesanan produk
-            foreach ($_SESSION["pesanan"] as $id_menu => $jumlah) {
-              $insert = mysqli_query($koneksi, "INSERT INTO pemesanan_produk (id_pemesanan, id_menu, jumlah) 
-              VALUES ('$id_terbaru', '$id_menu', '$jumlah') ");
-            }
-
-
-            // Mengosongkan pesanan
-            unset($_SESSION["pesanan"]);
-
-            // Dialihkan ke halaman nota
-            // echo "<script>alert('Pemesanan Sukses!');</script>";
-            // echo "<script>location= 'alatmakan.php'</script>";
-            echo "<script>
-            Swal.fire('Pembelian Berhasil', 'Silahkan Lakukan Pembayaran!', 'success', '200000')
-            </script>";
-            // echo "<script>location='halamanproduk.php'</script>";
-            echo "<script>var timer = setTimeout(function()
-        { window.location= 'alatmakan.php'}, 1000);
-        </script>";
-          }
-          ?>
         </div>
-
-        <!-- Akhir Menu -->
-
-
-
 
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
-      <script>
-        // $('.btn-delete').on('click', function() {
-        $('.btn-hapuspesan').on('click', function(event) {
-          event.preventDefault();
-          const url = $(this).attr('href');
-          Swal.fire({
-            title: 'Apakah anda yakin ingin menghapus data ini?',
-            text: "Data ini tidak akan terlihat lagi",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
-            if (result.value) {
-              Swal.fire("Terhapus!", "Data Berhasil Dihapus.", "success");
-              setTimeout(function() {
-                window.location.href = url;
-              }, 2000);
-              // window.location.href = url;
-            } else {
-              Swal.fire("Cancelled", "Data Tidak Jadi Dihapus :)", "error");
-            }
-          })
-        });
-      </script>
-
-
-
       <footer class="main-footer">
         <strong>TOKO KITA E-COMMERCE<a href="http://adminlte.io"></a></strong>
 
@@ -392,6 +323,7 @@ if (!isset($_SESSION['login_user'])) {
           <b>Version</b>1.0
         </div>
       </footer>
+
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
@@ -434,13 +366,6 @@ if (!isset($_SESSION['login_user'])) {
     <script src="template/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="template/dist/js/demo.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        $('#example').DataTable();
-      });
-    </script>
   </body>
 
   </html>

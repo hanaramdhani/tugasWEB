@@ -34,6 +34,14 @@ if (!isset($_SESSION['login_user'])) {
         <link rel="stylesheet" href="template/plugins/summernote/summernote-bs4.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        </link> -->
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+        <!-- <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" rel="stylesheet">
+        </link> -->
+        <script src="template/jquery-3.6.0.min.js"></script>
+        <script src="template/sweetalert2.all.min.js"></script>
     </head>
 
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -50,7 +58,7 @@ if (!isset($_SESSION['login_user'])) {
                         <a href="admin.php" class="nav-link" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="Aboutuser.php" class="nav-link" style="color: white;">Contact</a>
+                        <a href="About.php" class="nav-link" style="color: white;">Contact</a>
                     </li>
                 </ul>
 
@@ -154,7 +162,7 @@ if (!isset($_SESSION['login_user'])) {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-12">
-                                <h1 class="m-0 text-black text-center">DAFTAR HISTORI PENGIRIMAN</h1>
+                                <h1 class="m-0 text-black text-center">HALAMAN INPUT DATA PRODUK</h1>
 
                             </div><!-- /.col -->
 
@@ -176,36 +184,133 @@ if (!isset($_SESSION['login_user'])) {
                 </div> -->
                 <!-- Akhir Jumbotron -->
                 <!-- Menu -->
-
                 <div class="container">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="tambah_menu.php" class="btn btn-primary"><i class="fas fa-plus-circle"></i>TAMBAH DATA PRODUK</a>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <?php
+
+                        include('koneksi.php');
+
+                        $query = mysqli_query($koneksi, 'SELECT * FROM produk');
+                        $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 
+                        ?>
+
+
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <table class="table table-bordered" id="example">
+                                    <thead class="thead-light">
+                                        <tr class="text-center">
+                                            <th scope="col">No</th>
+                                            <th scope="col">Nama Produk</th>
+                                            <th scope="col">Jenis Produk</th>
+                                            <th scope="col">Stok</th>
+                                            <th scope="col">Harga</th>
+                                            <th scope="col">Gambar</th>
+                                            <th scope="col">Opsi</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <?php $nomor = 1; ?>
+                                        <?php
+                                        $ambil = mysqli_query($koneksi, 'SELECT * FROM produk');
+                                        $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
+                                        ?>
+                                        <?php foreach ($result as $result) : ?>
+
+                                            <tr>
+                                                <th scope="row" class="text-center"><?php echo $nomor; ?></th>
+
+                                                <td><?php echo $result["nama_menu"]; ?></td>
+                                                <td class="text-center"><?php echo $result["jenis_menu"]; ?></td>
+                                                <td class="text-center"><?php echo $result["stok"]; ?></td>
+                                                <td class="text-center"><?php echo $result["harga"]; ?></td>
+                                                <td class="text-center"><?php echo "<img src='upload/$result[gambar]' width='70' height='90' />"; ?></td>
+
+                                                <td class="text-center">
+
+                                                    <a href="edit_menu.php?id_menu=<?php echo $result['id_menu']  ?>" class="btn btn-primary mt-3"><i class="fa fa-edit"></i></a>
+
+                                                    <a href="hapus_menu.php?id_menu=<?php echo $result['id_menu']; ?>" class="btn btn-danger mt-3 btn-delete"><i class="fa fa-trash"></i></a>
+                                                    <!-- <a href="hapus_menu.php" class="btn btn-danger mt-3 btn-delete"><i class="fa fa-trash"></i></a> -->
+                                                </td>
+
+                                            </tr>
+                                            <?php $nomor++; ?>
+                                        <?php endforeach; ?>
+                                    </tbody>
+
+                                </table>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Akhir Menu -->
                 </div>
-                <!-- Akhir Menu -->
-
 
 
                 <!-- /.content -->
             </div>
-            <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <strong>TOKO KITA E-COMMERCE<a href="http://adminlte.io"></a></strong>
+        </div>
+        <!-- Akhir Menu -->
 
-                <div class="float-right d-none d-sm-inline-block">
-                    <b>Version</b>1.0
-                </div>
-            </footer>
+        <script>
+            // $('.btn-delete').on('click', function() {
+            $('.btn-delete').on('click', function(event) {
+                event.preventDefault();
+                const url = $(this).attr('href');
+                Swal.fire({
+                    title: 'Apakah anda yakin ingin menghapus data ini?',
+                    text: "Data ini tidak akan terlihat lagi",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire("Terhapus!", "Data Berhasil Dihapus.", "success");
+                        setTimeout(function() {
+                            window.location.href = url;
+                        }, 2000);
+                        // window.location.href = url;
+                    } else {
+                        Swal.fire("Cancelled", "Data Tidak Jadi Dihapus :)", "error");
+                    }
+                })
+            });
+        </script>
+        <footer class="main-footer">
+            <strong>TOKO KITA E-COMMERCE<a href="http://adminlte.io"></a></strong>
 
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b>1.0
+            </div>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
         </div>
         <!-- ./wrapper -->
 
-        <!-- jQuery -->
-        <script src="template/plugins/jquery/jquery.min.js"></script>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
         <!-- jQuery UI 1.11.4 -->
         <script src="template/plugins/jquery-ui/jquery-ui.min.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -238,6 +343,16 @@ if (!isset($_SESSION['login_user'])) {
         <script src="template/dist/js/pages/dashboard.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="template/dist/js/demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable();
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+
     </body>
 
     </html>

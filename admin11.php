@@ -21,6 +21,9 @@
     <title>Restoran Dessert Kelongtong</title>
   </head>
   <body>
+ 
+
+  
 
   <header class="bg-danger" style=" height: 70px;">
         <div class="atas">
@@ -29,7 +32,8 @@
             </H3>
         </div>
     </header>
-
+    
+    
     <div class="container-fluid" style="margin-top: 0px;">
         <div class="row"></div>
         <div class="row">
@@ -55,44 +59,46 @@
                     </div>
                 </div> -->
                 <!-- Akhir Jumbotron -->
-              <!-- Menu -->
+              <!-- Menu -->    
       <div class="container">
-        <a href="tambah_menu.php" class="btn btn-info mt-3">TAMBAH DAFTAR DESSERT</a>
-        <div class="row">
+        <div class="judul text-center mt-5">
+          <h3 class="font-weight-bold">RESTORAN DESSERT KELONGTONG</h3>
+          <h5>Selamat Datang di Beranda Admin</h5>
+        </div>
 
-          <?php 
-
-          include('koneksi.php');
-
-          $query = mysqli_query($koneksi, 'SELECT * FROM produk');
-          $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
-            
-
-          ?>
-
-          <?php foreach($result as $result) : ?>
-
-          <div class="col-md-3 mt-4">
-            <div class="card brder-dark">
-              <img src="upload/<?php echo $result['gambar'] ?>" style="width:80%; height: 140px; margin-top: 0px; display: block; margin: auto;" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title font-weight-bold"><?php echo $result['nama_menu'] ?></h5>
-               <label class="card-text harga"><strong>Rp.</strong> <?php echo number_format($result['harga']); ?></label><br>
-                <a href="edit_menu.php?id_menu=<?php echo $result['id_menu']  ?>" class="btn btn-info btn-sm btn-block">EDIT</a>
-
-                <a href="hapus_menu.php?id_menu=<?php echo $result['id_menu']  ?>" class="btn btn-danger btn-sm btn-block text-light">DELETE</a>
+        <div class="row mb-5 mt-5 ">
+          <div class="col-md-4 d-flex justify-content-end">
+            <div class="card bg-dark text-white border-light">
+              <img src="images/menu1.jpg" class="card-img" alt="Lihat Daftar Menu">
+              <div class="card-img-overlay mt-5 text-center">
+               <a href="P_DaftarPengguna.php" class="btn btn-info">LIHAT DAFTAR PENGGUNA</a>
               </div>
             </div>
           </div>
-              <?php endforeach; ?>
+
+          <div class="col-md-4 d-flex justify-content-start">
+            <div class="card bg-dark text-white border-light">
+              <img src="images/menu.jpg" class="card-img" alt="Lihat Pesanan">
+              <div class="card-img-overlay mt-5 text-center">
+              <a href="daftar_menu.php" class="btn btn-info">LIHAT DAFTAR DESSERT</a>
+              </div>
             </div>
           </div>
-            </div>
 
-          
+          <div class="col-md-4 d-flex justify-content-start">
+            <div class="card bg-dark text-white border-light">
+              <img src="images/menuP.jpg" class="card-img" alt="Lihat Pesanan">
+              <div class="card-img-overlay mt-5 text-center">
+               <a href="pesanan.php" class="btn btn-info">LIHAT PESANAN</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
   <!-- Akhir Menu -->
 
-  </div>
+        </div>
         </div>
     </div>
   
@@ -103,9 +109,6 @@
         </div>
     </footer>
   <!-- Akhir Footer -->
-
-
-
 
 
     <!-- Optional JavaScript -->
