@@ -101,6 +101,8 @@ if (!isset($_SESSION['login_user'])) {
                                             <th scope="col">Status Pengiriman</th>
                                             <th></th>
                                             <th></th>
+                                            <th></th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -118,10 +120,15 @@ if (!isset($_SESSION['login_user'])) {
                                             <td><?php echo $result["user"]; ?></td>
                                             <td><?php echo $result['status'] == 1 ? 'Barang Telah Sampai' : 'Barang Sedang Dikirim' ?>
                                             </td>
-                                            <td><button class="btn btn-sm btn-warning"><i
+                                            <td> <a href=" detail.php?id=<?php echo $result['id'] ?>"
+                                                    class="badge badge-primary">Detail</a></td>
+                                            <td>
+                                            <td><button disabled class="btn btn-sm btn-warning"><i
                                                         class="fa fa-truck"></i></button></td>
-                                            <td><a href="laporan.php?id=<?php echo $result['id'] ?>"
-                                                    class="badge badge-success" target="_blank">Detail Barang</a></td>
+                                            <td style='text-align:center'><button class='btn btn-primary'
+                                                    data-toggle='modal' data-target='#show'
+                                                    data-id=".$result['id'].">Detail</button></td>
+
                                         </tr>
                                         <?php $nomor++; ?>
                                         <?php endforeach; ?>
@@ -137,18 +144,106 @@ if (!isset($_SESSION['login_user'])) {
                                             <th scope="col">ID</th>
                                             <th scope="col">Tanggal Pesan</th>
                                             <th scope="col">Total Bayar</th>
+                                            <th scope="col">User</th>
+                                            <th scope="col">Status</th>
+                                            <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+                                            $ambil = mysqli_query($koneksi, "SELECT * FROM histori_pengiriman WHERE user='$_SESSION[login_user]'");
+                                            $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
+                                            ?>
+                                        <?php foreach ($result as $result) : ?>
+                                        <tr>
+                                            <td><?php echo $result["id"]; ?></td>
+                                            <td><?php echo $result["tgl_pesan"]; ?></td>
+                                            <td>Rp. <?php echo number_format($result["total"]); ?></td>
+                                            <td><?php echo $result["user"]; ?></td>
+                                            <td><?php echo $result["statuss"]; ?></td>
+                                            <td> <a href="detail.php?id=<?php echo $result['id'] ?>"
+                                                    class="badge badge-primary">Detail</a></td>
+                                            <td>
+                                            <td><button class="btn btn-success btn-sm"><i
+                                                        class="fas fa-check-circle"></i></button></td>
+                                            <td>
 
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
+
                                 </table>
                             </div>
+
+
 
                         </div>
                     </div>
                 </div>
+
+                <!-- Modal start here -->
+                <div class="modal fade" id="show" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title"><b>Detail</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="modal-data"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Modal -->
+
+                <script src="<?= $base_url; ?>/assets/js/jquery-2.2.3.min.js"></script>
+                <script src="<?= $base_url; ?>/assets/js/bootstrap.min.js"></script>
+
+                <!-- Ini merupakan script yang terpenting -->
+                <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#show').on('show.bs.modal', function(e) {
+                        var getDetail = $(e.relatedTarget).data('id');
+                        $.ajax({
+                            type: 'post',
+                            url: 'detail.php',
+                            data: 'getDetail=' + getDetail,
+                            success: function(data) {
+                                $('.modal-data').html(data);
+                            }
+                        });
+                    });
+                });
+                </script>
+
+
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    modal
+                </button>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
 
 
 

@@ -78,7 +78,7 @@ if (!isset($_SESSION['login_user'])) {
                 <div class="container">
                     <div class="judul-pesanan mt-5">
 
-                        <h3 class="text-center font-weight-bold">DATA PESANAN PELANGGAN</h3>
+                        <h3 class="text-center font-weight-bold">DETAIL BARANG</h3>
 
                     </div>
                     <table class="table table-bordered" id="example">
@@ -89,10 +89,9 @@ if (!isset($_SESSION['login_user'])) {
                                 <th scope="col">Nama Pesanan</th>
                                 <th scope="col">Harga</th>
                                 <th scope="col">Jumlah</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
                                 <th scope="col">Subharga</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,15 +109,10 @@ if (!isset($_SESSION['login_user'])) {
                                 <td><?php echo $pecah['nama_menu']; ?></td>
                                 <td>Rp. <?php echo number_format($pecah['harga']); ?></td>
                                 <td><?php echo $pecah['jumlah']; ?></td>
-                                <td><?php echo $pecah['gambar']; ?></td>
-                                <td>
-                                <td><img src="upload/<?php echo $pecah['gambar'] ?>"
-                                        style="width: 80%; height: 140px; margin-top: 0px; display: block; margin: auto;"
-                                        class="card-img-top" alt="..."></td>
-                                </td>
                                 <td>
                                     Rp. <?php echo number_format($pecah['harga'] * $pecah['jumlah']); ?>
                                 </td>
+                                <td><?php echo $pecah['gambar']; ?></td>
                             </tr>
                             <?php $nomor++; ?>
                             <?php $totalbelanja += $subharga1; ?>
@@ -135,34 +129,8 @@ if (!isset($_SESSION['login_user'])) {
 
 
                     <form method="POST" action="">
-                        <a href="pesanan.php" class="btn btn-success btn-sm">Kembali</a>
-
-                        <button class="btn btn-primary btn-sm" name="bayar">Konfirmasi Pembayaran</button>
+                        <a href="" class="btn btn-success btn-sm">Kembali</a>
                     </form>
-                    <?php
-                        if (isset($_POST["bayar"])) {
-                            echo "<script>alert('Pesanan Telah Dibayar !');</script>";
-                            echo "<script>location= 'pesanan.php'</script>";
-                        }
-                        ?>
-
-
-
-                    <?php
-                        $ambil = $koneksi->query("SELECT * FROM pemesanan WHERE id_pemesanan='$_GET[id]'");
-                        ?>
-                    <?php while ($pecah = $ambil->fetch_assoc()) { ?>
-                    <input type="text" value="<?php echo $pecah['id_pemesanan']; ?>">
-                    <input type="text" value="<?php echo $pecah['tanggal_pemesanan']; ?>">
-                    <input type="text" value="<?php echo $pecah['total_belanja']; ?>">
-                    <input type="text" value="<?php echo $pecah['statuss']; ?>">
-                    <input type="text" value="<?php echo $pecah['user']; ?>">
-                    <input type="text" value="<?php echo $pecah['bukti_pembayaran']; ?>">
-                    <img src="upload/<?php echo $pecah['bukti_pembayaran'] ?>"
-                        style="width: 70%; height: 70%; margin-top: 0px; display: block; margin: auto;"
-                        class="card-img-top" alt="...">
-                    <?php } ?>
-
                 </div>
                 <!-- Akhir Menu -->
 

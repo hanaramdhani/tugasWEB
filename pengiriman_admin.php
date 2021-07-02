@@ -99,6 +99,7 @@ if (!isset($_SESSION['login_user'])) {
                                             <th scope="col">Status Pengiriman</th>
                                             <th></th>
                                             <th></th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -116,9 +117,12 @@ if (!isset($_SESSION['login_user'])) {
                                             <td><?php echo $result["user"]; ?></td>
                                             <td><?php echo $result['status'] == 1 ? 'Barang Telah Sampai' : 'Barang Sedang Dikirim' ?>
                                             </td>
-                                            <td><button
+                                            <td> <a href=" detail.php?id=<?php echo $result['id'] ?>"
+                                                    class="badge badge-primary">Detail</a></td>
+                                            <td><a href="histori_pengiriman.php?id=<?php echo $result['id'] ?>"
+                                                    name="kirim"
                                                     class="btn btn-xs <?= $result['status'] == 1 ? 'btn-success' : 'btn-warning' ?> "><i
-                                                        class="fa <?= $result['status'] == 1 ? 'fa-check-circle' : 'fa-truck' ?>"></i></button></button>
+                                                        class="fa <?= $result['status'] == 1 ? 'fa-check-circle' : 'fa-truck' ?>"></i></button>
                                             </td>
                                             <td><a href="laporan.php?id=<?php echo $result['id'] ?>"
                                                     class="badge badge-success" target="_blank">Cetak</a></td>
@@ -128,7 +132,6 @@ if (!isset($_SESSION['login_user'])) {
                                     </tbody>
                                 </table>
                             </div>
-
                             <div class="tab-pane fade active" id="history-manifest-tab-content" role="tabpanel"
                                 aria-labelledby="manifest-tab">
                                 <table class="table table-bordered" id="history">
@@ -137,14 +140,49 @@ if (!isset($_SESSION['login_user'])) {
                                             <th scope="col">ID</th>
                                             <th scope="col">Tanggal Pesan</th>
                                             <th scope="col">Total Bayar</th>
+                                            <th scope="col">User</th>
+                                            <th scope="col">Status</th>
+                                            <th></th>
+                                            <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <?php
+                                            $ambil = mysqli_query($koneksi, 'SELECT * FROM histori_pengiriman');
+                                            $result = mysqli_fetch_all($ambil, MYSQLI_ASSOC);
+                                            ?>
+                                        <?php foreach ($result as $result) : ?>
+                                        <tr>
+                                            <td><?php echo $result["id"]; ?></td>
+                                            <td><?php echo $result["tgl_pesan"]; ?></td>
+                                            <td>Rp. <?php echo number_format($result["total"]); ?></td>
+                                            <td><?php echo $result["user"]; ?></td>
+                                            <td><?php echo $result["statuss"]; ?></td>
+                                            <td> <a href=" detail.php?id=<?php echo $result['id'] ?>"
+                                                    class="badge badge-primary">Detail</a></td>
+                                            <td>
+                                                <a href="laporan.php?id=<?php echo $result['id'] ?>"
+                                                    class="badge badge-success" target="_blank">Cetak</a>
+                                            </td>
+                                            <td><button class="btn btn-success btn-sm"><i
+                                                        class="fas fa-check-circle"></i></button></td>
+                                        </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
+                            <script type="text/javascript">
+                            // function kirim() {
+                            //     var yakin = confirm("Apakah barang sudah sampai ?");
+
+                            //     if (yakin) {
+                            //         window.location = 'pengiriman_admin.php';
+                            //     } else {
+                            //         window.location = 'pengiriman_admin.php';
+                            //     }
+                            // }
+                            </script>
 
                         </div>
                     </div>

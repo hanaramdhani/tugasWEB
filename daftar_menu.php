@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['login_user'])) {
-  header("location: login.php");
+    header("location: login.php");
 } else {
 ?>
 
@@ -81,13 +81,13 @@ if (!isset($_SESSION['login_user'])) {
 
                         <?php
 
-              include('koneksi.php');
+                            include('koneksi.php');
 
-              $query = mysqli_query($koneksi, 'SELECT * FROM produk');
-              $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
+                            $query = mysqli_query($koneksi, 'SELECT * FROM produk');
+                            $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 
-              ?>
+                            ?>
 
                         <?php foreach ($result as $result) : ?>
 
@@ -102,7 +102,6 @@ if (!isset($_SESSION['login_user'])) {
                                         <?php echo number_format($result['harga']); ?></label><br>
                                     <a href="edit_menu.php?id_menu=<?php echo $result['id_menu']  ?>"
                                         class="btn btn-info btn-sm btn-block">EDIT</a>
-
                                     <a href="hapus_menu.php?id_menu=<?php echo $result['id_menu']  ?>"
                                         class="btn btn-danger btn-sm btn-block text-light">DELETE</a>
                                 </div>

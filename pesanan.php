@@ -187,17 +187,7 @@ if (!isset($_SESSION['login_user'])) {
 
                         </div>
                     </div>
-
-                    <!-- /.card -->
                 </div>
-
-
-
-                <!-- <div class="container"> -->
-
-                <!-- </div> -->
-                <!-- Akhir Menu -->
-
             </div>
         </div>
     </div>

@@ -4,7 +4,6 @@ session_start();
 if (!isset($_SESSION['login_user'])) {
     header("location: login.php");
 } else {
-
     print_r($_SESSION);
 ?>
 
@@ -122,7 +121,6 @@ if (!isset($_SESSION['login_user'])) {
                 $id_menu = $_POST['id_menu'];
                 $jumlah = $_POST['jumlah'];
 
-
                 if (isset($_POST['pack'])) {
                     $insert = mysqli_query($koneksi, "INSERT INTO packing (id, tgl_pesan, total, user) VALUES ('$id', '$tgl_pesan', '$total', '$user')");
                     $insert = mysqli_query($koneksi, "INSERT INTO packing_detail (id, id_packing, id_menu, jumlah) VALUES ('$id_d', '$id_packing', '$id_menu', '$jumlah')");
@@ -131,9 +129,6 @@ if (!isset($_SESSION['login_user'])) {
                     $delete = mysqli_query($koneksi, "DELETE FROM pemesanan WHERE id_pemesanan='$_GET[id]'");
                     echo "<script>location= 'pesanan.php'</script>";
                 }
-
-
-
                 ?>
         </div>
     </div>

@@ -87,6 +87,9 @@ if (!isset($_SESSION['login_user'])) {
                                 <th scope="col">Jumlah</th>
                                 <th scope="col">Subharga</th>
                                 <th scope="col">Opsi</th>
+                                <th scope="col"></th>
+                                <th></th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -117,6 +120,10 @@ if (!isset($_SESSION['login_user'])) {
                                     <a href="hapus_pesanan.php?id_menu=<?php echo $id_menu ?>"
                                         class="badge badge-danger">Hapus</a>
                                 </td>
+                                <td><input type="text" name="gambar" value="<?php echo $pecah["gambar"]; ?>"></td>
+                                <td><img src="upload/<?php echo $pecah['gambar'] ?>"
+                                        style="width: 80%; height: 140px; margin-top: 0px; display: block; margin: auto;"
+                                        class="card-img-top" alt="..."></td>
                             </tr>
                             <?php $nomor++; ?>
                             <?php $totalbelanja += $subharga; ?>
@@ -147,6 +154,7 @@ if (!isset($_SESSION['login_user'])) {
                             $user = $_POST['user'];
                             $bukti_pembayaran = $_POST['bukti_pembayaran'];
                             $tanggal_pemesanan = date("Y-m-d");
+                            $gambar = $_POST['gambar'];
 
 
                             // Menyimpan data ke tabel pemesanan
@@ -157,8 +165,8 @@ if (!isset($_SESSION['login_user'])) {
 
                             // Menyimpan data ke tabel pemesanan produk
                             foreach ($_SESSION["pesanan"] as $id_menu => $jumlah) {
-                                $insert = mysqli_query($koneksi, "INSERT INTO pemesanan_produk (id_pemesanan, id_menu, jumlah) 
-              VALUES ('$id_terbaru', '$id_menu', '$jumlah') ");
+                                $insert = mysqli_query($koneksi, "INSERT INTO pemesanan_produk (id_pemesanan, id_menu, jumlah, gambar) 
+              VALUES ('$id_terbaru', '$id_menu', '$jumlah', '$gambar') ");
                             }
 
 
